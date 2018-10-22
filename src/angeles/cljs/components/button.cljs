@@ -52,8 +52,11 @@
               :cursor :not-allowed}}
 
   
-   ::icon {:display :inline-block
-           :margin-left "0.5rem"}})
+   ::icon-container {:display :inline-block
+                     :margin-left "0.5rem"}
+   
+   ::icon {:default 
+           {:color (c/pkc-colors :teal)}}})
 
 (defn button [_ _]
   (let [hover-atom (r/atom false)]
@@ -79,8 +82,8 @@
                                         ::disabled? disabled?)}
          text
          (when icon
-           [:div {:style (css ::icon)}
-             [c/icon {:color :teal} icon]])]))))
+           [:div {:style (css ::icon-container)}
+             [c/icon (c/css-options (css ::icon)) icon]])]))))
 
 (defn test-section []
   [c/section "Buttons"
