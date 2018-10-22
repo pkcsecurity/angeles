@@ -16,6 +16,8 @@
             :padding "0 0.5rem"
             :outline :none
             :border-top :none
+            :border-top-left-radius "4px"
+            :border-top-right-radius "4px"
             :border-left :none
             :border-right :none
             :border-bottom-width "2px"
@@ -49,9 +51,6 @@
                  :left 0
                  :height "2rem"
                  :width "2rem"
-                 :display :flex
-                 :align-items :center
-                 :font-size (c/text-sizes :h4)
                  :color (c/pkc-colors :gray)
                  :transition "color 0.2s ease-in-out"
                  :cursor :pointer}
@@ -73,10 +72,7 @@
                   :right 0
                   :height "2rem"
                   :width "2rem"
-                  :display :flex
-                  :align-items :center
                   :justify-content :flex-end
-                  :font-size (c/text-sizes :h4)
                   :color (c/pkc-colors :gray)
                   :transition "color 0.2s ease-in-out"
                   :cursor :pointer}

@@ -9,11 +9,16 @@
               :background-color (c/pkc-colors :teal)
               :font-size (c/text-sizes :h6)
               :border-width "2px"
+              :border-style :solid
+              :border-radius "4px"
               :border-color (c/pkc-colors :teal)
               :outline :none
               :color (c/pkc-colors :white)
               :cursor :pointer
-              :transition "all 0.2s ease-in-out"}
+              :transition "all 0.2s ease-in-out"
+              :display :flex
+              :justify-content :center
+              :align-items :center}
 
              ::dangerous?
              {:background-color (c/pkc-colors :red)
@@ -32,18 +37,28 @@
 
              ::secondary?
              {:background-color :transparent
-              :border "2px solid"
               :border-color (c/pkc-colors :teal)
               :color (c/pkc-colors :teal)}
               
              ::hovered?
              {:color (c/pkc-colors :white)
               :border-color (c/pkc-colors :success)
-              :background-color (c/pkc-colors :success)}}})
+              :background-color (c/pkc-colors :success)}
+
+             ::disabled?
+             {:color (c/pkc-colors :gray)
+              :border-color (c/pkc-colors :light-gray)
+              :background-color (c/pkc-colors :light-gray)
+              :cursor :not-allowed}}
+
+  
+   ::icon {:display :inline-block
+           :margin-left "0.5rem"}})
 
 (defn button [_ _]
   (let [hover-atom (r/atom false)]
     (fn [text {:keys [on-click
+                      icon
                       disabled?
                       ghosted?
                       dangerous?
@@ -60,8 +75,12 @@
                                         ::hovered? hovered?
                                         ::dangerous? dangerous?
                                         ::dangerous-hovered? (and dangerous?
-                                                                  hovered?))}
-         text]))))
+                                                                  hovered?)
+                                        ::disabled? disabled?)}
+         text
+         (when icon
+           [:div {:style (css ::icon)}
+             [c/icon {:color :teal} icon]])]))))
 
 (defn test-section []
   [c/section "Buttons"
@@ -69,6 +88,10 @@
     [c/container "Primary Button"
      [button "Button Text"
       {:on-click #(js/alert "click")}]]
+    [c/container "Button with Icon"
+     [button "Button Text"
+      {:icon :pen
+       :on-click #(js/alert "click")}]]
     [c/container "Secondary Button"
      [button "Button Text"
       {:secondary? true
@@ -80,4 +103,8 @@
     [c/container "Dangerous Button"
      [button "Button Text"
       {:dangerous? true
+       :on-click #(js/alert "click")}]]
+    [c/container "Disabled Button"
+     [button "Button Text"
+      {:disabled? true
        :on-click #(js/alert "click")}]]]])

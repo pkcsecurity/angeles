@@ -110,7 +110,10 @@
 (defn icon 
   ([icon-class] [icon {} icon-class])
   ([style icon-class]
-   [:i (merge {:class (str "far fa-" (name icon-class))}
-              {:style style})]))
+   [:span.fa-stack 
+    [:i.fas.fa-square.fa-stack-2x]
+    [:i.far.fa-stack-1x.fa-inverse 
+     {:style style
+      :class (str "fa-" (name icon-class))}]]))
 
 (def nop (constantly nil))
